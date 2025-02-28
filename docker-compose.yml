@@ -1,0 +1,21 @@
+version: '3'
+services:
+  gitbucket:
+    build: gitbucket_build
+    container_name: gitbucket
+    volumes:
+      - ./gitbucket_data:/gitbucket
+    ports:
+      - "8080:8080"
+      
+  postgres:
+    image: postgres:15.5
+    container_name: postgres
+    volumes:
+      - ./postgres_data/postgres.conf:/etc/postgresql.conf
+    environment:
+      POSTGRES_DB: "postgres"
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: "postgres"
+    ports:
+      - "5432:5432"  
